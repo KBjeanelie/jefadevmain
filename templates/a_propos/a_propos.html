@@ -43,7 +43,7 @@
                         <h2 class="text-blur">A propos de nous</h2>
                         <h2 class="area-title">{{ about_us.area_title }}</h2>
                         <p>{{ about_us.description }}</p>
-                        <a class="btn circle btn-theme border btn-md" href="{% url 'main:contacts:contact' %}">Devenir Volontaire</a>
+                        <a class="btn circle btn-theme border btn-md" href="{% url 'main:volontariat' %}">Devenir Volontaire</a>
                     </div>
                 {% else %}
                    <div class="col-lg-12 info">
@@ -268,63 +268,6 @@
 {#            </div>#}
 {#        </div>#}
 {#    </div>#}
-   <div class="volunteer-area bg-gray default-padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                    <div class="site-heading text-center">
-                        <h5>NOS BÉNÉVOLES</h5>
-                        <h2>
-                             Merci à nos merveilleux <br> bénévoles
-                        </h2>
-                        <div class="heading-divider"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            {% if volunteers %}
-                <div class="volunteer-items volunteer-carousel owl-carousel owl-theme text-center">
-                    {% for volunteer in volunteers %}
-                    <div class="item">
-                        <div class="thumb">
-                            <img src="{{ volunteer.image.url }}" alt="Thumb">
-                            <div class="social">
-                                <ul>
-                                    {% if volunteer.facebook_link %}
-                                    <li>
-                                        <a href="{{ volunteer.facebook_link }}"><i class="fab fa-facebook-f"></i></a>
-                                    </li>
-                                    {% endif %}
-                                    {% if volunteer.twitter_link %}
-                                    <li>
-                                        <a href="{{ volunteer.twitter_link }}"><i class="fab fa-twitter"></i></a>
-                                    </li>
-                                    {% endif %}
-                                    {% if volunteer.instagram_link %}
-                                    <li>
-                                        <a href="{{ volunteer.instagram_link }}"><i class="fab fa-instagram"></i></a>
-                                    </li>
-                                    {% endif %}
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="info">
-                            <h4>{{ volunteer.full_name }}</h4>
-                            <span>{{ volunteer.status }}</span>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            {% else %}
-                <div class="col-lg-12 text-center">
-                    <h4>Aucun bénévole n'est disponible pour le moment. Veuillez revenir plus tard.</h4>
-                </div>
-            {% endif %}
-        </div>
-    </div>
-    <!-- End Voluntter -->
-    
     <!-- Start Fun Factor Area
     ============================================= -->
 {#    <div class="fun-factor-area bg-gray half-bg default-padding-bottom">#}

@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.views import View
 from django.shortcuts import render
 
+from a_propos.models import Volunteer
 from contacts.forms import ContactForm
 from contacts.models import ContactInfo
 from JEFA_main.module_utilitaire import erreur404, reponseFatal, reponseSucces
@@ -12,8 +13,10 @@ class ContactView(View):
         print("=========== methode GET ==========", request.GET)
         if vue == 'contact':
             return self.Contacts(request)
+        elif vue == 'volontariat':
+            return self.Volontariat(request)
         elif vue == 'formulaire_volontaire':
-            return self.FormulaireVolontaire(request)
+            return self.Volontariat(request)
         else:
             erreur404()
 
@@ -36,11 +39,15 @@ class ContactView(View):
         return render(request, 'templates/contacts/contacts.html', context)
 
 
-    def FormulaireVolontaire(self, request):
+    def Volontariat(self, request):
+        volunteers = Volunteer.objects.all()
+        contact_info = ContactInfo.objects.first()
         context = {
-            'active_contact': 'active',
+            'active_volontariat': 'active',
+            'volunteers': volunteers,
+            'contact_info': contact_info,
         }
-        return render(request, 'templates/contacts/formulaire_volontaire.html', context)
+        return render(request, 'templates/contacts/volontariat.html', context)
 
     def enregistrerContactForm(self, request):
         if request.method == 'POST':

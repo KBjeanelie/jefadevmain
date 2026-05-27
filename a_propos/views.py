@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.views import View
 from django.shortcuts import render
 
-from a_propos.models import AboutUs, Volunteer, Mission, PlusDeStatistiques, Partenaire
+from a_propos.models import AboutUs, Mission, PlusDeStatistiques, Partenaire
 from contacts.models import ContactInfo
 #from institut_paule_mercure.module_utilitaire import erreur404
 
@@ -24,7 +24,6 @@ class AboutView(View):
 
     def aboutUs(self, request):
         about_us = AboutUs.objects.first()  # Assuming there is only one AboutUs entry
-        volunteers = Volunteer.objects.all()
         mission_section = Mission.objects.first()
         statistiques = PlusDeStatistiques.objects.first()
         partenaires = Partenaire.objects.all()
@@ -35,7 +34,6 @@ class AboutView(View):
         'mission_section': mission_section,
         'statistiques': statistiques,
         'partenaires': partenaires,
-        'volunteers': volunteers,
         'contact_info': contact_info,
         }
         return render(request, 'templates/a_propos/a_propos.html', context)
