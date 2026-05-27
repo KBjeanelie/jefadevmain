@@ -1,0 +1,338 @@
+{% extends 'templates/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block mqin_page %}
+    
+    <!-- Start Banner -->
+    <div class="banner-area inc-indicator content-less text-large">
+        <div id="bootcarousel" class="carousel text-light slide carousel-fade animate_text" data-ride="carousel">
+
+            <!-- Indicators for slides -->
+            <div class="carousel-indicator">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <ol class="carousel-indicators">
+                                {% for item in carousel_items %}
+                                    <li data-target="#bootcarousel" data-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}"></li>
+                                {% endfor %}
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner carousel-zoom">
+                {% for item in carousel_items %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <div class="slider-thumb bg-cover" style="background-image: url({{ item.image.url }});"></div>
+                        <div class="box-table">
+                            <div class="box-cell shadow dark">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-9">
+                                            <div class="content">
+                                                <h2 data-animation="animated slideInRight">{{ item.title }} <strong>{{ item.subtitle }}</strong></h2>
+                                                <p data-animation="animated slideInLeft">{{ item.description }}</p>
+                                                {% if item.button_text %}
+                                                    <a data-animation="animated fadeInUp" class="btn circle btn-light effect btn-md" href="{{ item.button_url }}">{{ item.button_text }}</a>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <!-- End Wrapper for slides -->
+
+        </div>
+    </div>
+    <!-- End Banner -->
+
+    <!-- Start About Area -->
+    <div class="about-area default-padding">
+        <div class="container">
+            <div class="row align-center">
+                {% if about_us %}
+                    <div class="col-lg-6">
+                        <div class="thumb">
+                            <img src="{{ about_us.image.url }}" alt="Thumb">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 info">
+                        <h5>A PROPOS DE NOUS</h5>
+                        <h2 class="text-blur">A propos de nous</h2>
+                        <h2 class="area-title">{{ about_us.area_title }}</h2>
+                        <p>{{ about_us.description }}</p>
+                        <a class="btn circle btn-theme border btn-md" href="{% url 'main:contacts:contact' %}">Devenir Volontaire</a>
+                    </div>
+                {% else %}
+                    <p>Aucune information disponible.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <!-- End About Area -->
+
+    <!-- Start What We Do -->
+    <div class="we-do-area half-bg default-padding bottom-less bg-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="site-heading text-center">
+                        <h5>CE QUE NOUS FAISONS</h5>
+                        <h2>
+                            Nous faisons des œuvres caritatives
+                            <br>dans le monde entier.
+                        </h2>
+                        <div class="heading-divider"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="wedo-items text-center">
+                <div class="row">
+                    <!-- Single Item -->
+                    <div class="single-item col-lg-3 col-md-6">
+                        <div class="item item_card">
+                            <i class="flaticon-water-bottle"></i>
+                            <h4>Livraison d'eau</h4>
+                            <p>
+                                Toujours longueur lettre adieux ajoutent nombre moment elle. Promet peu de boussole.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- End Single Item -->
+                    <!-- Single Item -->
+                    <div class="single-item col-lg-3 col-md-6">
+                        <div class="item item_card">
+                            <i class="flaticon-pharmacy"></i>
+                            <h4>Aide Médicale</h4>
+                            <p>
+                                Toujours longueur lettre adieux ajoutent nombre moment elle. Promet peu de boussole.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- End Single Item -->
+                    <!-- Single Item -->
+                    <div class="single-item col-lg-3 col-md-6">
+                        <div class="item item_card">
+                            <i class="flaticon-planet-earth"></i>
+                            <h4>Sauver les Plantes</h4>
+                            <p>
+                                Toujours longueur lettre adieux ajoutent nombre moment elle. Promet peu de boussole.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- End Single Item -->
+                    <!-- Single Item -->
+                    <div class="single-item col-lg-3 col-md-6">
+                        <div class="item item_card">
+                            <i class="flaticon-home"></i>
+                            <h4>Nous Construisons & Créons</h4>
+                            <p>
+                                Toujours longueur lettre adieux ajoutent nombre moment elle. Promet peu de boussole.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- End Single Item -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End What We Do -->
+
+    <!-- Start Recent Causes Area -->
+    <div class="recent-causes-area carousel-shadow causes-area default-padding-bottom">
+        <div class="container">
+            <div class="heading-left">
+                <div class="row">
+                    <div class="col-lg-6 left-info">
+                        <h5>Nos Actions</h5>
+                        <h2>
+                            Faire des œuvres de charité dans le monde entier.
+                        </h2>
+                    </div>
+                    <div class="col-lg-6 right-info">
+                        <p>
+                            Nous croyons en la transparence et l'honnêteté dans toutes nos interactions.
+                        </p>
+                        <a class="btn circle btn-md btn-gradient wow fadeInUp" href="{% url 'nos_actions:nos_actions' %}">Tout voir <i class="fas fa-angle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container-full">
+            <div class="row">
+                <div class="col-lg-12 causes-items">
+                    <div class="recent-causes-carousel owl-carousel owl-theme">
+                        {% for article in articles %}
+                            <!-- Single Item -->
+                            <div class="item">
+                                <div class="thumb">
+                                    <a href="{% url 'nos_actions:article_detail' article.id %}">
+                                        <img src="{% if article.image %}{{ article.image.url }}{% else %}https://via.placeholder.com/800x400{% endif %}" alt="{{ article.titre }}">
+                                        <span class="overlay">
+                                            <strong>Fait : </strong> {{ article.date_pub|date:"d M Y" }}
+                                        </span>
+                                    </a>
+                                </div>
+                                <div class="info">
+                                    <h4>
+                                        <a href="{% url 'nos_actions:article_detail' article.id %}">{{ article.titre }}</a>
+                                    </h4>
+                                    <p>
+                                        {{ article.resume|truncatewords:20 }}
+                                    </p>
+                                    <a class="btn-more" href="{% url 'nos_actions:article_detail' article.id %}">Lire plus</a>
+                                </div>
+                            </div>
+                            <!-- End Single Item -->
+                        {% empty %}
+                            <div class="item">
+                                <div class="info text-center">
+                                    <p>Aucune action disponible pour le moment.</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Recent Causes Area -->
+
+    <!-- Start Donation -->
+    <div class="donation-area bg-gray bg-less default-padding">
+        <div class="container">
+            <div class="row align-center">
+                <div class="col-lg-6 info">
+                    <h5>FAIRE UN DON AUJOURD'HUI</h5>
+                    <h2 class="area-title">Faites un don aujourd'hui et participez à la sauvé des vie</h2>
+                    <p>
+                        Aidez nous a apporter du sourire dans la visages des gens
+                    </p>
+                    <div class="question">
+                        <div class="icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="info">
+                            <h5>Vous avez des questions sur les dons ? </h5>
+                            <span>Appeler maintenant: +242065736315</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 donation-form">
+                    <div class="form-box">
+                        <form action="#">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="Amount">Montant</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="Amount" placeholder="00.00 XAF" required>
+                                            <span class="input-group-addon"><i class="fas fa-dollar-sign"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="donateType">Frequency</label>
+                                        <select id="donateType" class="form-control">
+                                            <option value="once">Once</option>
+                                            <option value="weekly">Weekly</option>
+                                            <option value="Fortnightly">Fortnightly</option>
+                                            <option value="Monthly">Monthly</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="cardNumber">Card Number</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="cardNumber" placeholder="Valid Card Number" required>
+                                            <span class="input-group-addon"><i class="fas fa-credit-card"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-7 col-sm-7 col-xs-8">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label for="expMonth">Date d'expiration</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                                <input type="text" class="form-control" id="expMonth" placeholder="MM" required data-stripe="exp_month" />
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                                <input type="text" class="form-control" name="expYear" placeholder="YY" required data-stripe="exp_year" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 col-sm-5 col-xs-4 pull-right">
+                                    <div class="form-group">
+                                        <label for="cvCode">CV Code</label>
+                                        <input type="password" class="form-control" id="cvCode" placeholder="CV" required data-stripe="cvc" />
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <button class="btn btn-theme effect btn-md" type="submit">Donate Now</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Donation Area -->
+
+    <!-- Start Testimonials -->
+    <div class="testimonials-area carousel-shadow default-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="site-heading text-center">
+                        <h5>Témoignages</h5>
+                        <h2>Ce que les gens disent<br>A propos de l'institut Paule Mercure</h2>
+                        <div class="heading-divider"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="testimonial-items testimonial-carousel owl-carousel owl-theme">
+                        {% for testimonial in testimonials %}
+                            <div class="item">
+                                <div class="info">
+                                    <div class="top-info">
+                                        <i class="flaticon-left-quote-1"></i>
+                                        <div class="provider">
+                                            <h4>{{ testimonial.full_name }}</h4>
+                                            <span>{{ testimonial.status }}</span>
+                                        </div>
+                                    </div>
+                                    <p>{{ testimonial.message }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Testimonials Area -->
+    
+{% endblock mqin_page %}

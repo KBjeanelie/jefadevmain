@@ -1,0 +1,457 @@
+{% extends 'templates/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block mqin_page %}
+    
+
+
+    <!-- Start Breadcrumb 
+    ============================================= -->
+    <div class="breadcrumb-area text-center shadow dark bg-fixed padding-xl text-light" style="background-image: url({% static 'assets/img/banner/6.jpg' %});">
+        <div class="container">
+            <div class="breadcrumb-items">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>A propos de nous</h2>
+                    </div>
+                </div>
+                <ul class="breadcrumb d-none">
+                    <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#">Page</a></li>
+                    <li class="active">About</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- End Breadcrumb -->
+
+    
+        <!-- Star About Area
+    ============================================= -->
+  <div class="about-area default-padding">
+        <div class="container">
+            <div class="row align-center">
+                {% if about_us %}
+                    <div class="col-lg-6">
+                        <div class="thumb">
+                            <img src="{{ about_us.image.url }}" alt="Thumb">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 info">
+                        <h5>A PROPOS DE NOUS</h5>
+                        <h2 class="text-blur">A propos de nous</h2>
+                        <h2 class="area-title">{{ about_us.area_title }}</h2>
+                        <p>{{ about_us.description }}</p>
+                        <a class="btn circle btn-theme border btn-md" href="{% url 'main:contacts:contact' %}">Devenir Volontaire</a>
+                    </div>
+                {% else %}
+                   <div class="col-lg-12 info">
+                        <h5>Notre mission</h5>
+                        <h2 class="text-blur">Mission</h2>
+                        <h2 class="area-title">Aucun élément disponible</h2>
+                        <p>Veuillez revenir plus tard pour plus d'informations sur notre mission.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <!-- End About Area -->
+
+        <!-- Start Our Mission 
+    ============================================= -->
+{#    <div class="mission-area half-bg default-padding-bottom bg-gray">#}
+{#        <div class="container">#}
+{#            <div class="row">#}
+{#                <div class="col-lg-8 info">#}
+{#                    <h5>Notre mission</h5>#}
+{#                    <h2 class="text-blur">Mission</h2>#}
+{#                    <h2 class="area-title">Nous pensons que nous pouvons sauver plus de vies avec vous.</h2>#}
+{#                    <p>#}
+{#                         nous travaillons chaque jour pour avoir un impact positif sur notre communauté et au-delà.#}
+{#                    </p>#}
+{##}
+{#                    <h4>Nos priorités stratégiques jusqu'en 2050 sont les suivantes</h4>#}
+{#                    <ul>#}
+{#                        <li>Protéger les associations caritatives contre les abus et la mauvaise gestion</li>#}
+{#                        <li>Permettre aux administrateurs de gérer efficacement leurs organisations caritatives</li>#}
+{#                        <li>Encourager une plus grande transparence et une plus grande responsabilité</li>#}
+{#                    </ul>#}
+{#                    <a class="btn circle btn-theme border btn-md" href="#">Nous rejoindre</a>#}
+{#                </div>#}
+{#                  <div class="col-lg-4 thumb-box">#}
+{#                    <div class="thumb">#}
+{#                        <div class="thumb">#}
+{#                            <img src="{% static 'assets/img/about/6.jpg' %}" alt="Thumb">#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+    <div class="mission-area half-bg default-padding-bottom bg-gray">
+        <div class="container">
+            <div class="row">
+                {% if mission_section %}
+                    <div class="col-lg-6 info">
+                        <h5>Notre mission</h5>
+                        <h2 class="text-blur">Mission</h2>
+                        <h2 class="area-title">{{ mission_section.area_title }}</h2>
+                        <p>{{ mission_section.description }}</p>
+
+                        <h4>Nos priorités stratégiques jusqu'en 2050 sont les suivantes</h4>
+                        <ul>
+                            {% for priority in mission_section.priorities.splitlines %}
+                                <li>{{ priority }}</li>
+                            {% endfor %}
+                        </ul>
+                        <a class="btn circle btn-theme border btn-md" href="#">Nous rejoindre</a>
+                    </div>
+                    <div class="col-lg-6 thumb-box">
+                        <div class="thumb">
+                            <img src="{{ mission_section.image.url }}" alt="Thumb">
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="col-lg-12 info">
+                        <h5>Notre mission</h5>
+                        <h2 class="text-blur">Mission</h2>
+                        <h2 class="area-title">Aucun élément disponible</h2>
+                        <p>Veuillez revenir plus tard pour plus d'informations sur notre mission.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- End Our Mission -->
+    
+    
+        <!-- Start Voluntter 
+    ============================================= -->
+{#    <div class="volunteer-area bg-gray default-padding">#}
+{#        <div class="container">#}
+{#            <div class="row">#}
+{#                <div class="col-lg-8 offset-lg-2">#}
+{#                    <div class="site-heading text-center">#}
+{#                        <h5>NOS BÉNÉVOLAT</h5>#}
+{#                        <h2>#}
+{#                             Merci à nos merveilleux <br> bénévoles#}
+{#                        </h2>#}
+{#                        <div class="heading-divider"></div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="container">#}
+{#            <div class="volunteer-items volunteer-carousel owl-carousel owl-theme text-center">#}
+{#                <!-- Single Item -->#}
+{#                <div class="item">#}
+{#                    <div class="thumb">#}
+{#                        <img src="{% static 'assets/img/team/1.jpg'%}" alt="Thumb">#}
+{#                        <div class="social">#}
+{#                            <ul>#}
+{#                                <li>#}
+{#                                    <a href="#"><i class="fab fa-facebook-f"></i></a>#}
+{#                                </li>#}
+{#                                <li>#}
+{#                                    <a href="#"><i class="fab fa-twitter"></i></a>#}
+{#                                </li>#}
+{#                                <li>#}
+{#                                    <a href="#"><i class="fab fa-instagram"></i></a>#}
+{#                                </li>#}
+{#                            </ul>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="info">#}
+{#                        <h4>Jones Park</h4>#}
+{#                        <span>Volunteer</span>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <!-- End Single Item -->#}
+{#                <!-- Single Item -->#}
+{#                <div class="item">#}
+{#                    <div class="thumb">#}
+{#                        <img src="{% static 'assets/img/team/2.jpg'%}" alt="Thumb">#}
+{#                        <div class="social">#}
+{#                            <ul>#}
+{#                                <li>#}
+{#                                    <a href="#"><i class="fab fa-facebook-f"></i></a>#}
+{#                                </li>#}
+{#                                <li>#}
+{#                                    <a href="#"><i class="fab fa-twitter"></i></a>#}
+{#                                </li>#}
+{#                                <li>#}
+{#                                    <a href="#"><i class="fab fa-instagram"></i></a>#}
+{#                                </li>#}
+{#                            </ul>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="info">#}
+{#                        <h4>Monal Spoa</h4>#}
+{#                        <span>Volunteer</span>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <!-- End Single Item -->#}
+{#                <!-- Single Item -->#}
+{#                <div class="item">#}
+{#                    <div class="thumb">#}
+{#                        <img src="{% static 'assets/img/team/3.jpg'%}" alt="Thumb">#}
+{#                        <div class="social">#}
+{#                            <ul>#}
+{#                                <li>#}
+{#                                    <a href="#"><i class="fab fa-facebook-f"></i></a>#}
+{#                                </li>#}
+{#                                <li>#}
+{#                                    <a href="#"><i class="fab fa-twitter"></i></a>#}
+{#                                </li>#}
+{#                                <li>#}
+{#                                    <a href="#"><i class="fab fa-instagram"></i></a>#}
+{#                                </li>#}
+{#                            </ul>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="info">#}
+{#                        <h4>Devid Blue</h4>#}
+{#                        <span>Volunteer</span>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <!-- End Single Item -->#}
+{#                <!-- Single Item -->#}
+{#                <div class="item">#}
+{#                    <div class="thumb">#}
+{#                        <img src="{% static 'assets/img/team/4.jpg'%}" alt="Thumb">#}
+{#                        <div class="social">#}
+{#                            <ul>#}
+{#                                <li>#}
+{#                                    <a href="#"><i class="fab fa-facebook-f"></i></a>#}
+{#                                </li>#}
+{#                                <li>#}
+{#                                    <a href="#"><i class="fab fa-twitter"></i></a>#}
+{#                                </li>#}
+{#                                <li>#}
+{#                                    <a href="#"><i class="fab fa-instagram"></i></a>#}
+{#                                </li>#}
+{#                            </ul>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="info">#}
+{#                        <h4>Jones Park</h4>#}
+{#                        <span>Volunteer</span>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <!-- End Single Item -->#}
+{#                                <!-- Single Item -->#}
+{#                <div class="item">#}
+{#                    <div class="thumb">#}
+{#                        <img src="{% static 'assets/img/team/6.jpg'%}" alt="Thumb">#}
+{#                        <div class="social">#}
+{#                            <ul>#}
+{#                                <li>#}
+{#                                    <a href="#"><i class="fab fa-facebook-f"></i></a>#}
+{#                                </li>#}
+{#                                <li>#}
+{#                                    <a href="#"><i class="fab fa-twitter"></i></a>#}
+{#                                </li>#}
+{#                                <li>#}
+{#                                    <a href="#"><i class="fab fa-instagram"></i></a>#}
+{#                                </li>#}
+{#                            </ul>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="info">#}
+{#                        <h4>Jones Park</h4>#}
+{#                        <span>Volunteer</span>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <!-- End Single Item -->#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+   <div class="volunteer-area bg-gray default-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="site-heading text-center">
+                        <h5>NOS BÉNÉVOLES</h5>
+                        <h2>
+                             Merci à nos merveilleux <br> bénévoles
+                        </h2>
+                        <div class="heading-divider"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            {% if volunteers %}
+                <div class="volunteer-items volunteer-carousel owl-carousel owl-theme text-center">
+                    {% for volunteer in volunteers %}
+                    <div class="item">
+                        <div class="thumb">
+                            <img src="{{ volunteer.image.url }}" alt="Thumb">
+                            <div class="social">
+                                <ul>
+                                    {% if volunteer.facebook_link %}
+                                    <li>
+                                        <a href="{{ volunteer.facebook_link }}"><i class="fab fa-facebook-f"></i></a>
+                                    </li>
+                                    {% endif %}
+                                    {% if volunteer.twitter_link %}
+                                    <li>
+                                        <a href="{{ volunteer.twitter_link }}"><i class="fab fa-twitter"></i></a>
+                                    </li>
+                                    {% endif %}
+                                    {% if volunteer.instagram_link %}
+                                    <li>
+                                        <a href="{{ volunteer.instagram_link }}"><i class="fab fa-instagram"></i></a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="info">
+                            <h4>{{ volunteer.full_name }}</h4>
+                            <span>{{ volunteer.status }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="col-lg-12 text-center">
+                    <h4>Aucun bénévole n'est disponible pour le moment. Veuillez revenir plus tard.</h4>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <!-- End Voluntter -->
+    
+    <!-- Start Fun Factor Area
+    ============================================= -->
+{#    <div class="fun-factor-area bg-gray half-bg default-padding-bottom">#}
+{#        <div class="container">#}
+{#            <div class="fact-items text-center bg-cover" style="background-image: url({% static 'assets/img/banner/17.jpg' %});">#}
+{#                <div class="row">#}
+{#                    <div class="col-lg-3 col-md-6 item">#}
+{#                        <div class="fun-fact">#}
+{#                            <div class="timer" data-to="28" data-speed="2024">28</div>#}
+{#                            <span class="medium">Année de fondation</span>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="col-lg-3 col-md-6 item">#}
+{#                        <div class="fun-fact">#}
+{#                            <div class="timer" data-to="780" data-speed="5000">780</div>#}
+{#                            <span class="medium">Nombre de donateur</span>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="col-lg-3 col-md-6 item">#}
+{#                        <div class="fun-fact">#}
+{#                            <div class="timer" data-to="1600" data-speed="5000">1600</div>#}
+{#                            <span class="medium">bénévole engagé</span>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="col-lg-3 col-md-6 item">#}
+{#                        <div class="fun-fact">#}
+{#                            <div class="timer" data-to="688" data-speed="5000">688</div>#}
+{#                            <span class="medium">Activité réussit</span>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+     {% if statistiques %}
+        <div class="fun-factor-area bg-gray half-bg default-padding-bottom">
+            <div class="container">
+                <div class="fact-items text-center bg-cover" style="background-image: url({{ statistiques.image.url }});">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 item">
+                            <div class="fun-fact">
+                                <div class="timer" data-to="{{ statistiques.annee_fondation }}" data-speed="2024">{{ statistiques.annee_fondation }}</div>
+                                <span class="medium">Année de fondation</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 item">
+                            <div class="fun-fact">
+                                <div class="timer" data-to="{{ statistiques.nombre_donateurs }}" data-speed="5000">{{ statistiques.nombre_donateurs }}</div>
+                                <span class="medium">Nombre de donateurs</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 item">
+                            <div class="fun-fact">
+                                <div class="timer" data-to="{{ statistiques.nombre_benevoles }}" data-speed="5000">{{ statistiques.nombre_benevoles }}</div>
+                                <span class="medium">Bénévoles engagés</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 item">
+                            <div class="fun-fact">
+                                <div class="timer" data-to="{{ statistiques.activites_reussies }}" data-speed="5000">{{ statistiques.activites_reussies }}</div>
+                                <span class="medium">Activités réussies</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="fun-factor-area bg-gray half-bg default-padding-bottom">
+            <div class="container">
+                <div class="fact-items text-center bg-cover">
+                    <h3>Pas de statistiques disponibles pour le moment.</h3>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <!-- End Fun Factor Area -->
+    
+    
+        <!-- Start Clients Area 
+    ============================================= -->
+{#    <div class="clients-area default-padding-bottom">#}
+{#        <div class="container">#}
+{#            <div class="row align-center">#}
+{#                <div class="col-lg-5 info">#}
+{#                    <h2>Nos Partenaires</h2>#}
+{#                    <p>#}
+{#                        ILs nous accompagne dans toutes nos actions#}
+{#                    </p>#}
+{#                </div>#}
+{#                <div class="col-lg-7 item-box">#}
+{#                    <div class="client-items client-carousel owl-carousel owl-theme">#}
+{#                        <div class="item"><img src="{% static 'assets/img/clients/1.png'%}" alt="Thumb"></div>#}
+{#                        <div class="item"><img src="{% static 'assets/img/clients/2.png'%}" alt="Thumb"></div>#}
+{#                        <div class="item"><img src="{% static 'assets/img/clients/3.png'%}" alt="Thumb"></div>#}
+{#                        <div class="item"><img src="{% static 'assets/img/clients/4.png'%}" alt="Thumb"></div>#}
+{#                        <div class="item"><img src="{% static 'assets/img/clients/5.png'%}" alt="Thumb"></div>#}
+{#                        <div class="item"><img src="{% static 'assets/img/clients/6.png'%}" alt="Thumb"></div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+       <div class="clients-area default-padding-bottom">
+        <div class="container">
+            <div class="row align-center">
+                <div class="col-lg-5 info">
+                    <h2>Nos Partenaires</h2>
+                    <p>
+                        Ils nous accompagnent dans toutes nos actions.
+                    </p>
+                </div>
+                <div class="col-lg-7 item-box">
+                    {% if partenaires %}
+                    <div class="client-items client-carousel owl-carousel owl-theme">
+                        {% for partenaire in partenaires %}
+                        <div class="item"><img src="{{ partenaire.image.url }}" alt="{{ partenaire.nom }}" height="100" width="150"></div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <p>Aucun partenaire n'est disponible pour le moment.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Clients Area -->
+    
+    
+{% endblock mqin_page %}

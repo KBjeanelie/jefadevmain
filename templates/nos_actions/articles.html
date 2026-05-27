@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block mqin_page %}
+<!-- Start Breadcrumb -->
+<div class="breadcrumb-area text-center shadow dark bg-fixed padding-xl text-light" style="background-image: url({% static 'assets/img/banner/21.jpg' %});">
+    <div class="container">
+        <div class="breadcrumb-items">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>{{ article.titre }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Breadcrumb -->
+
+<!-- Start Blog -->
+<div class="blog-area single full-blog full-blog default-padding">
+    <div class="container">
+        <div class="blog-items">
+            <div class="row">
+                <div class="blog-content wow fadeInUp col-lg-10 offset-lg-1 col-md-12">
+                    <div class="item">
+                        <div class="blog-item-box">
+                            <!-- Debug Info -->
+                            <!-- Start Post Thumb -->
+                            <div class="thumb">
+                                <a href="{% url 'nos_actions:article_detail' article.id %}">
+                                    <img src="{% if article.image %}{{ article.image.url }}{% else %}https://via.placeholder.com/800x400{% endif %}" alt="{{ article.titre }}">
+                                </a>
+                            </div>
+                            <!-- End Post Thumb -->
+
+                            <div class="info">
+                                <div class="tags">
+                                    {% for tag in article.tags.split %}
+                                        <a href="{% url 'nos_actions:articles_by_tag' tag %}">{{ tag }}</a>
+                                    {% endfor %}
+                                </div>
+                                <div class="meta">
+                                    <ul>
+                                        <li><i class="fas fa-calendar-alt"></i> {{ article.date_pub|date:"d M Y" }}</li>
+                                        <li>{% trans "By" %} <a href="#">{{ article.auteur }}</a></li>
+                                    </ul>
+                                </div>
+                                
+                                <h3>{{ article.titre }}</h3>
+                                <p>{{ article.resume }}</p>
+                                <div class="content">
+                                    {{ article.contenu|safe }}
+                                </div>
+
+                                <a href="{% url 'nos_actions:articles_list' %}" class="btn btn-primary mt-3">{% trans "Retour aux articles" %}</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Start Post Pagination -->
+                    <div class="post-pagi-area d-flex justify-content-between">
+                        {% if article.get_previous_by_date_pub %}
+                            <a href="{% url 'nos_actions:article_detail' article.get_previous_by_date_pub.id %}">
+                                <i class="fas fa-angle-double-left"></i> {% trans "Article précédent" %}
+                                <h5>{{ article.get_previous_by_date_pub.titre }}</h5>
+                            </a>
+                        {% else %}
+                            <a href="#" class="disabled">
+                                <i class="fas fa-angle-double-left"></i> {% trans "Article précédent" %}
+                                <h5>-</h5>
+                            </a>
+                        {% endif %}
+                        {% if article.get_next_by_date_pub %}
+                            <a href="{% url 'nos_actions:article_detail' article.get_next_by_date_pub.id %}">
+                                {% trans "Article suivant" %} <i class="fas fa-angle-double-right"></i>
+                                <h5>{{ article.get_next_by_date_pub.titre }}</h5>
+                            </a>
+                        {% else %}
+                            <a href="#" class="disabled">
+                                {% trans "Article suivant" %} <i class="fas fa-angle-double-right"></i>
+                                <h5>-</h5>
+                            </a>
+                        {% endif %}
+                    </div>
+                    <!-- End Post Pagination -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Blog -->
+{% endblock mqin_page %}

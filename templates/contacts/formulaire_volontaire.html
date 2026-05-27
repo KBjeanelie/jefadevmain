@@ -1,0 +1,158 @@
+{% extends 'templates/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block mqin_page %}
+
+    <!-- Start Breadcrumb
+    ============================================= -->
+    <div class="breadcrumb-area text-center shadow dark bg-cover padding-xl text-light" style="background-image: url({% static 'assets/img/banner/7.jpg' %});">
+        <div class="container">
+            <div class="breadcrumb-items">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>Devenir Volontaire</h2>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- End Breadcrumb -->
+
+        <!-- Start Formulaire d'adhésion
+    ============================================= -->
+    <div class="contact-form-area default-padding">
+        <div class="container">
+            <div class="row align-center">
+                <!-- Start Contact Form -->
+                <div class="col-lg-12 contact-forms">
+                    <div class="content">
+                        <div class="heading text-center">
+                            <h3>Formulaire d'adhésion</h3>
+                        </div>
+                        <form action="" method="POST" class="contact-form" enctype="multipart/form-data" id="formulaire_adhesion">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <input class="form-control" id="name" name="name" placeholder="Nom" type="text">
+                                        <span class="alert-error"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <input class="form-control" id="prenom" name="prenom" placeholder="Prénom" type="text">
+                                        <span class="alert-error"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <input class="form-control" id="email" name="email" placeholder="Votre Email" type="email">
+                                        <span class="alert-error"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <input class="form-control" id="addresse" name="addresse" placeholder="Votre addresse" type="text">
+                                        <span class="alert-error"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <input class="form-control" id="phone" name="phone" placeholder="Téléphone" type="text">
+                                        <span class="alert-error"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <select class="form-control" id="genre" name="genre" placeholder="Selectionnez votre genre" >
+                                            <option value="M" selected disabled>Selectionnez votre genre</option>
+                                            <option value="M">Masculin</option>
+                                            <option value="F">Feminin</option>
+                                        <span class="alert-error"></span>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <select class="form-control" id="statut" name="statut" placeholder="Selectionnez votre status" >
+                                            <option value="M" selected disabled>Selectionnez votre status</option>
+                                            <option value="M">Employé</option>
+                                            <option value="F">Etudiant</option>
+                                            <option value="F">Libérale</option>
+                                            <option value="F">Sans emploie</option>
+                                        <span class="alert-error"></span>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <select class="form-control" id="nationnalite" name="nationnalite" placeholder="Selectionnez votre nationnalite" >
+                                            <option value="M" selected disabled>Selectionnez votre nationnalité</option>
+                                            <option value="M">Congo</option>
+                                            <option value="F">Bénin</option>
+                                        <span class="alert-error"></span>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                         <label for="file-upload">Votre CV</label>
+                                        <input class="form-control" id="cv" name="cv" placeholder="votre CV" type="file" accept=".pdf, .docx">
+                                        <span class="alert-error"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                         <label for="file-upload">Votre lettre de motivation</label>
+                                        <input class="form-control" id="lettre" name="lettre" placeholder="votre CV" type="file" accept=".pdf, .docx">
+                                        <span class="alert-error"></span>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group comments">
+                                        <textarea class="form-control" id="comments" name="comments" placeholder="Parlez nous de vous "></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="submit" name="submit" id="submit">
+                                        envoyer <i class="fa fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- Alert Message -->
+                            <div class="col-md-12 alert-notification">
+                                <div id="message" class="alert-msg"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- End Contact Form -->
+
+            </div>
+        </div>
+    </div>
+    <!-- End Formulaire d'adhésion -->
+
+    <!-- Start Google Maps
+    ============================================= -->
+    <div class="maps-area">
+        <div class="google-maps">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d14767.262289338461!2d70.79414485000001!3d22.284975!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1424308883981"></iframe>
+        </div>
+    </div>
+    <!-- End Google Maps -->
+{% endblock mqin_page %}

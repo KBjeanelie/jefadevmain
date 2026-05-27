@@ -1,0 +1,21 @@
+# Environnement virtuel
+env_jefa/
+
+# Fichiers temporaires Python
+__pycache__/
+*.pyc
+
+# Fichiers de base de données
+db.sqlite3
+
+# Fichiers de configuration sensibles
+*.env
+
+# Fichiers statiques collectés
+staticfiles/
+
+# Fichiers médias (si vous stockez des fichiers uploadés localement)
+media/
+
+# Fichiers téléchargés ou temporaires
+get-pip.py

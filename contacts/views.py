@@ -1,0 +1,62 @@
+from django.http import JsonResponse
+from django.views import View
+from django.shortcuts import render
+
+from contacts.forms import ContactForm
+from contacts.models import ContactInfo
+from JEFA_main.module_utilitaire import erreur404, reponseFatal, reponseSucces
+
+
+class ContactView(View):
+    def get(self, request, vue=None):
+        print("=========== methode GET ==========", request.GET)
+        if vue == 'contact':
+            return self.Contacts(request)
+        elif vue == 'formulaire_volontaire':
+            return self.FormulaireVolontaire(request)
+        else:
+            erreur404()
+
+    def post(self, request):
+        print("=========== methode POST ==========", request.POST)
+        action = request.POST.get('op', None)
+
+        if request.META.get('HTTP_X_REQUESTED_WITH') == "XMLHttpRequest":
+            print('La vue ==========', action)
+
+            if action == 'save_contact':
+                return JsonResponse(self.enregistrerContactForm(request))
+
+    def Contacts(self, request):
+        contact_info = ContactInfo.objects.first()
+        context = {
+            'active_contact': 'active',
+            'contact_info': contact_info,
+        }
+        return render(request, 'templates/contacts/contacts.html', context)
+
+
+    def FormulaireVolontaire(self, request):
+        context = {
+            'active_contact': 'active',
+        }
+        return render(request, 'templates/contacts/formulaire_volontaire.html', context)
+
+    def enregistrerContactForm(self, request):
+        if request.method == 'POST':
+            form = ContactForm(request.POST)
+            if form.is_valid():
+                # Enregistrer les données dans la base de données
+                form.save()
+
+                # Réponse JSON pour l'AJAX
+                return reponseSucces('Message envoyé avec succès!')
+            else:
+                # Récupérer les erreurs de validation
+                errors = form.errors.as_json()
+                # return JsonResponse({'success': False, 'errors': errors})
+                return reponseFatal('errors')
+
+        return reponseFatal({'success': False, 'message': 'Erreur lors de l\'envoi du message.'})
+
+

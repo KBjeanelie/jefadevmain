@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block mqin_page %}
+<!-- Start Breadcrumb -->
+<div class="breadcrumb-area text-center shadow dark bg-fixed padding-xl text-light" style="background-image: url({% static 'assets/img/banner/21.jpg' %});">
+    <div class="container">
+        <div class="breadcrumb-items">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>{% trans "Nos actions" %}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Breadcrumb -->
+
+<!-- Start Blog -->
+<div class="blog-area single full-blog full-blog default-padding">
+    <div class="container">
+        <div class="blog-items">
+            <div class="row">
+                <div class="blog-content wow fadeInUp col-lg-10 offset-lg-1 col-md-12">
+                    {% if articles %}
+                        {% for article in articles %}
+                            <!-- Debug Info -->
+                            <div class="item mb-5">
+                                <div class="blog-item-box">
+                                    <!-- Article image -->
+                                    <div class="thumb">
+                                        <a href="{% url 'nos_actions:article_detail' article.id %}">
+                                            <img src="{% if article.image %}{{ article.image.url }}{% else %}https://via.placeholder.com/800x400{% endif %}" alt="{{ article.titre }}" class="w-full h-48 object-cover">
+                                        </a>
+                                    </div>
+
+                                    <!-- Article info -->
+                                    <div class="info">
+                                        <div class="tags">
+                                            {% for tag in article.tags.split %}
+                                                <a href="{% url 'nos_actions:articles_by_tag' tag %}">{{ tag }}</a>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="meta">
+                                            <ul>
+                                                <li><i class="fas fa-calendar-alt"></i> {{ article.date_pub|date:"d M Y" }}</li>
+                                                <li><i class="fas fa-user"></i> {{ article.auteur }}</li>
+                                            </ul>
+                                        </div>
+
+                                        <h3>{{ article.titre }}</h3>
+                                        <p>{{ article.resume|truncatewords:40 }}</p>
+
+                                        <a href="{% url 'nos_actions:article_detail' article.id %}" class="btn btn-primary mt-2">{% trans "Lire plus" %}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="text-center text-muted">{% trans "Aucun article disponible pour le moment." %}</p>
+                    {% endif %}
+
+                    <!-- Start Pagination -->
+                    {% if articles.has_other_pages %}
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center">
+                                {% if articles.has_previous %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ articles.previous_page_number }}" aria-label="Previous">
+                                            <span aria-hidden="true">«</span>
+                                        </a>
+                                    </li>
+                                {% endif %}
+
+                                {% for num in articles.paginator.page_range %}
+                                    <li class="page-item {% if articles.number == num %}active{% endif %}">
+                                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                    </li>
+                                {% endfor %}
+
+                                {% if articles.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ articles.next_page_number }}" aria-label="Next">
+                                            <span aria-hidden="true">»</span>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    {% endif %}
+                    <!-- End Pagination -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Blog -->
+{% endblock mqin_page %}
