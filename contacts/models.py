@@ -37,6 +37,7 @@ class ContactMessage(models.Model):
     phone = models.CharField(max_length=20, blank=True, null=True)
     objet = models.CharField(max_length=200)
     comments = models.TextField()
+    traite = models.BooleanField(default=False, verbose_name="Traité")
     create = models.DateTimeField(verbose_name="Created", auto_now_add=True)
     last_update = models.DateTimeField(verbose_name="Last update", auto_now=True)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -47,9 +48,9 @@ class ContactMessage(models.Model):
                                    related_name="ContactMessage_updated")
 
     class Meta:
-        ordering = ('-created_by',)
-        verbose_name = 'ContactMessage'
-        verbose_name_plural = 'ContactMessage'.upper()
+        ordering = ('-create',)
+        verbose_name = 'Message de contact'
+        verbose_name_plural = 'Messages de contact'
 
     def __str__(self):
         return self.name

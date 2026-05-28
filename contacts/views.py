@@ -59,10 +59,11 @@ class ContactView(View):
                 # Réponse JSON pour l'AJAX
                 return reponseSucces('Message envoyé avec succès!')
             else:
-                # Récupérer les erreurs de validation
-                errors = form.errors.as_json()
-                # return JsonResponse({'success': False, 'errors': errors})
-                return reponseFatal('errors')
+                erreurs = '; '.join(
+                    f"{champ}: {', '.join(msg_list)}"
+                    for champ, msg_list in form.errors.items()
+                )
+                return reponseFatal(erreurs or 'Veuillez vérifier les champs du formulaire.')
 
         return reponseFatal({'success': False, 'message': 'Erreur lors de l\'envoi du message.'})
 
